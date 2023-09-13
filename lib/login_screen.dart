@@ -1,4 +1,5 @@
 import 'package:chillout_cafe/home_screen.dart';
+import 'package:chillout_cafe/utils/my_bottom_nav.dart';
 import 'package:chillout_cafe/utils/my_button_two.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -124,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           context,
                           MaterialPageRoute<void>(
                               builder: (BuildContext context) =>
-                                  const HomeScreen()),
+                                  const MyBottomNav()),
                           ModalRoute.withName('/'),
                         );
                       }
