@@ -1,8 +1,10 @@
-import 'package:chillout_cafe/app_colors.dart';
-import 'package:chillout_cafe/my_button.dart';
+import 'package:chillout_cafe/utils/app_colors.dart';
+import 'package:chillout_cafe/utils/my_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'login_screen.dart';
 
 class LandingScreen extends StatelessWidget {
   const LandingScreen({super.key});
@@ -52,8 +54,10 @@ class LandingScreen extends StatelessWidget {
               child: MyButton(
                 buttonText: 'SHOP NOW',
                 onPressed: () {
-                  // Navigator.push(
-                  //     context, MaterialPageRoute(builder: (context) => LoginPage()));
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginScreen()));
                 },
               ),
             ),
