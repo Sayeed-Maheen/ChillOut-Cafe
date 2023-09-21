@@ -1,3 +1,4 @@
+import 'package:chillout_cafe/details_screen.dart';
 import 'package:chillout_cafe/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,7 +16,7 @@ class HomeScreen extends StatelessWidget {
         appBar: buildAppBar(),
         body: TabBarView(
           children: [
-            popularSection(),
+            popularSection(context),
             blackCoffeeSection(),
             winterSpecialSection(),
             cafeSpecialSection(),
@@ -103,7 +104,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  ListView popularSection() {
+  ListView popularSection(context) {
     final List<String> coffeeImages = [
       'assets/images/coffee_1.jpg',
       'assets/images/coffee_2.jpg',
@@ -130,52 +131,59 @@ class HomeScreen extends StatelessWidget {
         SizedBox(height: 16.h),
         ...List.generate(
           coffeeImages.length,
-              (index) =>
-              Container(
-                padding: REdgeInsets.all(8),
-                margin: REdgeInsets.only(left: 16, right: 16, bottom: 16),
-                decoration: BoxDecoration(
-                  color: colorSecondary,
-                  borderRadius: BorderRadius.circular(12.r),
-                ),
-                child: Row(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8.r),
-                      child: Image.asset(
-                        coffeeImages[index],
-                        width: 50.w,
-                        height: 73.h,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    SizedBox(width: 16.w),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          coffeeCategory[index],
-                          style: TextStyle(
-                            color: colorPrimary,
-                            fontSize: 10.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(height: 2.h),
-                        Text(
-                          coffeeName[index],
-                          style: TextStyle(
-                            color: colorPrimary,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w600,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
+          (index) => InkWell(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const DetailsScreen()));
+            },
+            child: Container(
+              padding: REdgeInsets.all(8),
+              margin: REdgeInsets.only(left: 16, right: 16, bottom: 16),
+              decoration: BoxDecoration(
+                color: colorSecondary,
+                borderRadius: BorderRadius.circular(12.r),
               ),
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8.r),
+                    child: Image.asset(
+                      coffeeImages[index],
+                      width: 50.w,
+                      height: 73.h,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  SizedBox(width: 16.w),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        coffeeCategory[index],
+                        style: TextStyle(
+                          color: colorPrimary,
+                          fontSize: 10.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(height: 2.h),
+                      Text(
+                        coffeeName[index],
+                        style: TextStyle(
+                          color: colorPrimary,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w600,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
         ),
       ],
     );
@@ -208,52 +216,51 @@ class HomeScreen extends StatelessWidget {
         SizedBox(height: 16.h),
         ...List.generate(
           coffeeImages.length,
-              (index) =>
-              Container(
-                padding: REdgeInsets.all(8),
-                margin: REdgeInsets.only(left: 16, right: 16, bottom: 16),
-                decoration: BoxDecoration(
-                  color: colorSecondary,
-                  borderRadius: BorderRadius.circular(12.r),
+          (index) => Container(
+            padding: REdgeInsets.all(8),
+            margin: REdgeInsets.only(left: 16, right: 16, bottom: 16),
+            decoration: BoxDecoration(
+              color: colorSecondary,
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.r),
+                  child: Image.asset(
+                    coffeeImages[index],
+                    width: 50.w,
+                    height: 73.h,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-                child: Row(
+                SizedBox(width: 16.w),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8.r),
-                      child: Image.asset(
-                        coffeeImages[index],
-                        width: 50.w,
-                        height: 73.h,
-                        fit: BoxFit.cover,
+                    Text(
+                      coffeeCategory[index],
+                      style: TextStyle(
+                        color: colorPrimary,
+                        fontSize: 10.sp,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
-                    SizedBox(width: 16.w),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          coffeeCategory[index],
-                          style: TextStyle(
-                            color: colorPrimary,
-                            fontSize: 10.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(height: 2.h),
-                        Text(
-                          coffeeName[index],
-                          style: TextStyle(
-                            color: colorPrimary,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w600,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        )
-                      ],
+                    SizedBox(height: 2.h),
+                    Text(
+                      coffeeName[index],
+                      style: TextStyle(
+                        color: colorPrimary,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w600,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     )
                   ],
-                ),
-              ),
+                )
+              ],
+            ),
+          ),
         ),
       ],
     );
@@ -286,52 +293,51 @@ class HomeScreen extends StatelessWidget {
         SizedBox(height: 16.h),
         ...List.generate(
           coffeeImages.length,
-              (index) =>
-              Container(
-                padding: REdgeInsets.all(8),
-                margin: REdgeInsets.only(left: 16, right: 16, bottom: 16),
-                decoration: BoxDecoration(
-                  color: colorSecondary,
-                  borderRadius: BorderRadius.circular(12.r),
+          (index) => Container(
+            padding: REdgeInsets.all(8),
+            margin: REdgeInsets.only(left: 16, right: 16, bottom: 16),
+            decoration: BoxDecoration(
+              color: colorSecondary,
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.r),
+                  child: Image.asset(
+                    coffeeImages[index],
+                    width: 50.w,
+                    height: 73.h,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-                child: Row(
+                SizedBox(width: 16.w),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8.r),
-                      child: Image.asset(
-                        coffeeImages[index],
-                        width: 50.w,
-                        height: 73.h,
-                        fit: BoxFit.cover,
+                    Text(
+                      coffeeCategory[index],
+                      style: TextStyle(
+                        color: colorPrimary,
+                        fontSize: 10.sp,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
-                    SizedBox(width: 16.w),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          coffeeCategory[index],
-                          style: TextStyle(
-                            color: colorPrimary,
-                            fontSize: 10.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(height: 2.h),
-                        Text(
-                          coffeeName[index],
-                          style: TextStyle(
-                            color: colorPrimary,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w600,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        )
-                      ],
+                    SizedBox(height: 2.h),
+                    Text(
+                      coffeeName[index],
+                      style: TextStyle(
+                        color: colorPrimary,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w600,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     )
                   ],
-                ),
-              ),
+                )
+              ],
+            ),
+          ),
         ),
       ],
     );
@@ -364,56 +370,53 @@ class HomeScreen extends StatelessWidget {
         SizedBox(height: 16.h),
         ...List.generate(
           coffeeImages.length,
-              (index) =>
-              Container(
-                padding: REdgeInsets.all(8),
-                margin: REdgeInsets.only(left: 16, right: 16, bottom: 16),
-                decoration: BoxDecoration(
-                  color: colorSecondary,
-                  borderRadius: BorderRadius.circular(12.r),
+          (index) => Container(
+            padding: REdgeInsets.all(8),
+            margin: REdgeInsets.only(left: 16, right: 16, bottom: 16),
+            decoration: BoxDecoration(
+              color: colorSecondary,
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.r),
+                  child: Image.asset(
+                    coffeeImages[index],
+                    width: 50.w,
+                    height: 73.h,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-                child: Row(
+                SizedBox(width: 16.w),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8.r),
-                      child: Image.asset(
-                        coffeeImages[index],
-                        width: 50.w,
-                        height: 73.h,
-                        fit: BoxFit.cover,
+                    Text(
+                      coffeeCategory[index],
+                      style: TextStyle(
+                        color: colorPrimary,
+                        fontSize: 10.sp,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
-                    SizedBox(width: 16.w),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          coffeeCategory[index],
-                          style: TextStyle(
-                            color: colorPrimary,
-                            fontSize: 10.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(height: 2.h),
-                        Text(
-                          coffeeName[index],
-                          style: TextStyle(
-                            color: colorPrimary,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w600,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        )
-                      ],
+                    SizedBox(height: 2.h),
+                    Text(
+                      coffeeName[index],
+                      style: TextStyle(
+                        color: colorPrimary,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w600,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     )
                   ],
-                ),
-              ),
+                )
+              ],
+            ),
+          ),
         ),
       ],
     );
   }
-
-
 }
